@@ -76,9 +76,9 @@ node seedProducts.js
 
 Start the backend server:
 
-\```bash
+```bash
 npm run dev
-\```
+```
 
 *(Backend runs on `http://localhost:5000`)*
 
