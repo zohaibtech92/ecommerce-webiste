@@ -32,33 +32,6 @@ A full-stack e-commerce platform built with MongoDB, Express.js, React, and Node
 
 ---
 
-## Project Structure
-
-\```text
-e-commerce-website/
-├── client/                     # React Frontend (Vite)
-│   ├── src/
-│   │   ├── components/         # Navbar, ProtectedRoute, ProductCard, StripePaymentForm
-│   │   ├── context/            # AuthContext, CartContext
-│   │   ├── pages/              # HomePage, ProductCatalogPage, CartPage, CheckoutPage, ProfilePage, AdminDashboardPage
-│   │   ├── App.jsx             # Main Router & Provider wrapper
-│   │   └── main.jsx            # React DOM entry point
-│   ├── .env                    # Frontend environment variables
-│   └── package.json
-│
-└── server/                     # Node.js / Express Backend
-    ├── controllers/            # authController, productController, orderController, userController, paymentController
-    ├── middleware/             # authMiddleware (protect, adminOnly)
-    ├── models/                 # userModel, productModel, orderModel
-    ├── routes/                 # authRoutes, productRoutes, orderRoutes, userRoutes, paymentRoutes
-    ├── seedProducts.js         # Database population script
-    ├── .env                    # Backend environment variables
-    ├── app.js                  # Express setup
-    ├── server.js               # Entry point & DB connection
-    └── package.json
-\```
----
-
 ## Getting Started
 
 ### Prerequisites
