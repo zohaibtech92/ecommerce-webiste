@@ -46,34 +46,33 @@ A full-stack e-commerce platform built with MongoDB, Express.js, React, and Node
 
 #### 1. Clone the Repository
 
-\```bash
+```bash
 git clone https://github.com/your-username/your-repo-name.git
 cd your-repo-name
-\```
+```
 
 #### 2. Backend Setup
 
 Navigate to the `server` folder and install dependencies:
 
-\```bash
+```bash
 cd server
 npm install
-\```
+```
 
 Create a `.env` file in the `server/` directory:
-
-\```env
+```env
 PORT=5000
 MONGO_URI=mongodb://127.0.0.1:27017/mernshop
 JWT_SECRET=super_secret_jwt_key_dev_mode_12345
 STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key_here
-\```
+```
 
 Seed initial sample products into MongoDB:
 
-\```bash
+```bash
 node seedProducts.js
-\```
+```
 
 Start the backend server:
 
@@ -96,15 +95,15 @@ npm install
 
 Create a `.env` file in the `client/` directory:
 
-\```env
+```env
 VITE_STRIPE_PUBLIC_KEY=pk_test_your_stripe_public_key_here
-\```
+```
 
 Start the frontend development server:
 
-\```bash
+```bash
 npm run dev
-\```
+```
 
 *(Frontend runs on `http://localhost:5173`)*
 
