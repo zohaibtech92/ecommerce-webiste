@@ -57,7 +57,6 @@ e-commerce-website/
     ├── server.js               # Entry point & DB connection
     └── package.json
 \```
-
 ---
 
 ## Getting Started
