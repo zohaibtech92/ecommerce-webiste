@@ -88,10 +88,10 @@ npm run dev
 
 Open a new terminal window, navigate to the `client` folder, and install dependencies:
 
-\```bash
+```bash
 cd client
 npm install
-\```
+```
 
 Create a `.env` file in the `client/` directory:
 
