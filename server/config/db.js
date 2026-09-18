@@ -5,7 +5,7 @@ export default async function connectDB(){
   // the documented MONGODB_URI name.
   const mongoUri = process.env.MONGODB_URI || process.env.MONGO_URI;
   if(!mongoUri) throw new Error('MONGODB_URI is not configured.');
-  const conn=await mongoose.connect(mongoUri);
+  const conn=await mongoose.connect(mongoUri, { serverSelectionTimeoutMS: 10000 });
   console.log(`[Database] MongoDB Connected: ${conn.connection.host}`);
   return conn;
 }
