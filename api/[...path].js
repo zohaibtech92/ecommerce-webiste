@@ -17,6 +17,12 @@ export default async function handler(request, response) {
     }
 
     await databaseConnection;
+
+    // Vercel may strip the /api prefix before invoking a catch-all function.
+    if (request.url && !request.url.startsWith('/api')) {
+      request.url = `/api${request.url.startsWith('/') ? '' : '/'}${request.url}`;
+    }
+
     return app(request, response);
   } catch (error) {
     console.error('[Vercel API] Database initialization failed:', error);
