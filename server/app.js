@@ -11,7 +11,14 @@ import paymentRoutes from './routes/paymentRoutes.js';
 const app = express();
 
 app.use(express.json());
-app.use(cors({ origin: ['http://localhost:5173', 'http://127.0.0.1:5173'], credentials: true }));
+const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:5173,http://127.0.0.1:5173')
+  .split(',')
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+app.use(cors({
+  origin: (origin, callback) => callback(null, !origin || allowedOrigins.includes(origin)),
+  credentials: true,
+}));
 
 // Routes
 app.use('/api/products', productRoutes);

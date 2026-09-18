@@ -28,7 +28,7 @@ const AdminDashboardPage = () => {
 
   const fetchProducts = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/products');
+      const res = await fetch(`${import.meta.env.VITE_API_URL || '/api'}/products`);
       const data = await res.json();
       if (!res.ok) throw new Error(data.message || 'Failed to fetch products');
       setProducts(data.data?.products || data.data || []);
@@ -41,7 +41,7 @@ const AdminDashboardPage = () => {
 
   const fetchOrders = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/orders/admin', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || '/api'}/orders/admin`, {
         headers: { Authorization: `Bearer ${user?.token}` },
       });
       const data = await res.json();
@@ -96,8 +96,8 @@ const AdminDashboardPage = () => {
     try {
       const res = await fetch(
         editingProductId
-          ? `http://localhost:5000/api/products/${editingProductId}`
-          : 'http://localhost:5000/api/products',
+          ? `${import.meta.env.VITE_API_URL || '/api'}/products/${editingProductId}`
+          : `${import.meta.env.VITE_API_URL || '/api'}/products`,
         {
         method: editingProductId ? 'PUT' : 'POST',
         headers: {
@@ -153,7 +153,7 @@ const AdminDashboardPage = () => {
 
   const handleOrderStatus = async (orderId, field, value) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/orders/${orderId}/status`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || '/api'}/orders/${orderId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -175,7 +175,7 @@ const AdminDashboardPage = () => {
     if (!window.confirm('Are you sure you want to delete this product?')) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || '/api'}/products/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${user?.token}`,

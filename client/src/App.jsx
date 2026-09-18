@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import Navbar from './components/Navbar';
+import Footer from './components/layout/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
 
 import HomePage from './pages/HomePage';
@@ -43,6 +44,7 @@ function App() {
                 </Route>
               </Routes>
             </main>
+            <Footer />
           </div>
         </Router>
       </CartProvider>

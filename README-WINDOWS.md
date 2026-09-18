@@ -79,6 +79,23 @@ npm.cmd run dev
 Frontend: http://localhost:5173  
 Backend health check: http://localhost:5000/api/health
 
+## Deploy to Vercel
+Import the repository into Vercel with the repository root as the project root. The included `vercel.json` builds `client` and routes `/api/*` to the Express serverless function.
+
+Add these Vercel environment variables:
+
+```text
+MONGODB_URI=<your MongoDB Atlas connection string>
+JWT_SECRET=<a long random secret>
+JWT_EXPIRES_IN=30d
+NODE_ENV=production
+CLIENT_URL=https://<your-vercel-domain>
+STRIPE_SECRET_KEY=<your Stripe secret key, if using card payments>
+VITE_STRIPE_PUBLIC_KEY=<your Stripe publishable key, if using card payments>
+```
+
+Leave `VITE_API_URL` unset for a single Vercel project so the client uses the same-origin `/api` function. If the frontend and backend are deployed separately, set `VITE_API_URL` to the backend URL ending in `/api` and set `CLIENT_URL` to the frontend URL.
+
 ## If npm reports a corrupted dependency tree
 From the project root:
 

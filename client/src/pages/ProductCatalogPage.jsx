@@ -19,8 +19,8 @@ const ProductCatalogPage = () => {
         setError(null);
         const query = new URLSearchParams(searchParams).toString();
         const endpoint = query
-          ? `http://localhost:5000/api/products?${query}`
-          : 'http://localhost:5000/api/products';
+          ? `${import.meta.env.VITE_API_URL || '/api'}/products?${query}`
+          : `${import.meta.env.VITE_API_URL || '/api'}/products`;
         const res = await fetch(endpoint);
 
         if (!res.ok) {

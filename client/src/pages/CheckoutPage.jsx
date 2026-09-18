@@ -36,7 +36,7 @@ const CheckoutPage = () => {
     if (cartItems.length === 0 || paymentMethod !== 'Stripe' || !user?.token || !hasStripeKey) return;
 
     // Request PaymentIntent clientSecret from backend
-    fetch('http://localhost:5000/api/payment/create-payment-intent', {
+    fetch(`${import.meta.env.VITE_API_URL || '/api'}/payment/create-payment-intent`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ const CheckoutPage = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:5000/api/orders', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || '/api'}/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -125,7 +125,7 @@ const CheckoutPage = () => {
         isPaid: true,
       };
 
-      const res = await fetch('http://localhost:5000/api/orders', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || '/api'}/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
