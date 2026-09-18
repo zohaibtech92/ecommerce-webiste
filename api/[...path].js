@@ -1,10 +1,14 @@
-import app from '../server/app.js';
-import connectDB from '../server/config/db.js';
-
 let databaseConnection;
+let app;
+let connectDB;
 
 export default async function handler(request, response) {
   try {
+    if (!app || !connectDB) {
+      ({ default: app } = await import('../server/app.js'));
+      ({ default: connectDB } = await import('../server/config/db.js'));
+    }
+
     if (!databaseConnection) {
       databaseConnection = connectDB().catch((error) => {
         databaseConnection = undefined;
