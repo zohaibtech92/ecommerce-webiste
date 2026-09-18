@@ -2,7 +2,6 @@ import Stripe from 'stripe';
 import dotenv from 'dotenv';
 
 dotenv.config();
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 // @desc    Create Stripe PaymentIntent
 // @route   POST /api/payment/create-payment-intent
@@ -15,6 +14,8 @@ export const createPaymentIntent = async (req, res) => {
         message: 'Stripe is not configured. Add a valid STRIPE_SECRET_KEY to server/.env.'
       });
     }
+
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
     const { items, shippingPrice = 0, taxPrice = 0 } = req.body;
 
