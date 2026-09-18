@@ -7,6 +7,7 @@ import authRoutes from './routes/authRoutes.js'; // <-- ADD THIS
 import orderRoutes from './routes/orderRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import paymentRoutes from './routes/paymentRoutes.js';
+import { errorHandler, notFound } from './middleware/errorMiddleware.js';
 
 const app = express();
 
@@ -34,5 +35,8 @@ app.get('/', (req, res) => {
 app.get('/api/health', (req, res) => {
   res.json({ success: true, message: 'E-Commerce API Service is healthy and operational' });
 });
+
+app.use(notFound);
+app.use(errorHandler);
 
 export default app;
