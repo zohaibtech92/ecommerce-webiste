@@ -32,7 +32,13 @@ const RegisterPage = () => {
         body: JSON.stringify({ name, email, password }),
       });
 
-      const data = await res.json();
+      const responseText = await res.text();
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch {
+        throw new Error(`Registration service returned an invalid response (${res.status}). Please try again later.`);
+      }
 
       if (!res.ok) {
         throw new Error(data.message || 'Registration failed');

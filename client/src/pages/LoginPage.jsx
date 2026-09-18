@@ -25,7 +25,13 @@ const LoginPage = () => {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await res.json();
+      const responseText = await res.text();
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch {
+        throw new Error(`Login service returned an invalid response (${res.status}). Please try again later.`);
+      }
 
       if (!res.ok) {
         throw new Error(data.message || 'Failed to login');
