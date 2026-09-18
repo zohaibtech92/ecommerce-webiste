@@ -18,8 +18,14 @@ export default async function handler(request, response) {
 
     await databaseConnection;
 
-    // Vercel may strip the /api prefix before invoking a catch-all function.
-    if (request.url && !request.url.startsWith('/api')) {
+    // Vercel exposes catch-all segments as the `path` query parameter.
+    const pathSegments = request.query?.path;
+    if (pathSegments) {
+      const path = Array.isArray(pathSegments) ? pathSegments.join('/') : pathSegments;
+      const query = new URL(request.url || '/', 'http://localhost');
+      query.searchParams.delete('path');
+      request.url = `/api/${String(path).replace(/^\/+/, '')}${query.search}`;
+    } else if (request.url && !request.url.startsWith('/api')) {
       request.url = `/api${request.url.startsWith('/') ? '' : '/'}${request.url}`;
     }
 
