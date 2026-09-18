@@ -1,6 +1,7 @@
 {
   "name": "mern-ecommerce-root",
   "version": "1.0.0",
+  "type": "module",
   "description": "Full-Stack Production MERN E-Commerce Platform",
   "scripts": {
     "server": "npm run dev --prefix server",
