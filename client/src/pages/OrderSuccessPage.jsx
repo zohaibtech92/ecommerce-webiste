@@ -17,7 +17,13 @@ const OrderSuccessPage = () => {
             Authorization: `Bearer ${user?.token}`,
           },
         });
-        const data = await res.json();
+        const responseText = await res.text();
+        let data;
+        try {
+          data = JSON.parse(responseText);
+        } catch {
+          throw new Error(`Order receipt service returned an invalid response (${res.status}).`);
+        }
 
         if (!res.ok) throw new Error(data.message || 'Could not fetch order');
         setOrder(data.data);
