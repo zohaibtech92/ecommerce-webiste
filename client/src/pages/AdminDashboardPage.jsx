@@ -161,7 +161,13 @@ const AdminDashboardPage = () => {
         },
         body: JSON.stringify({ [field]: value }),
       });
-      const data = await res.json();
+      const responseText = await res.text();
+      let data;
+      try {
+        data = JSON.parse(responseText);
+      } catch {
+        throw new Error(`Order status service returned an invalid response (${res.status}).`);
+      }
       if (!res.ok) throw new Error(data.message || 'Failed to update order');
       setOrders((currentOrders) => currentOrders.map((order) => (
         order._id === orderId ? data.data : order
