@@ -12,6 +12,15 @@ const hasStripeKey = Boolean(
   !import.meta.env.VITE_STRIPE_PUBLIC_KEY.includes('your_')
 );
 
+const readJsonResponse = async (response, fallbackMessage) => {
+  const responseText = await response.text();
+  try {
+    return JSON.parse(responseText);
+  } catch {
+    throw new Error(`${fallbackMessage} (${response.status})`);
+  }
+};
+
 const CheckoutPage = () => {
   const { cartItems, clearCart } = useCart();
   const { user } = useAuth();
@@ -45,7 +54,7 @@ const CheckoutPage = () => {
       body: JSON.stringify({ items: cartItems, shippingPrice, taxPrice }),
     })
       .then(async (res) => {
-        const data = await res.json();
+        const data = await readJsonResponse(res, 'Payment service returned an invalid response');
         if (!res.ok) throw new Error(data.message || 'Unable to initialize card payment');
         return data;
       })
@@ -91,7 +100,7 @@ const CheckoutPage = () => {
         })
       });
 
-      const data = await res.json();
+      const data = await readJsonResponse(res, 'Order service returned an invalid response');
       if (!res.ok) throw new Error(data.message || 'Order creation failed');
 
       clearCart();
@@ -134,7 +143,7 @@ const CheckoutPage = () => {
         body: JSON.stringify(orderData),
       });
 
-      const data = await res.json();
+      const data = await readJsonResponse(res, 'Order service returned an invalid response');
       if (!res.ok) throw new Error(data.message || 'Order creation failed');
 
       clearCart();
