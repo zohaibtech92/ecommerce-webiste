@@ -70,6 +70,7 @@ export const updateOrderStatus = async (req, res) => {
   if (req.body.isPaid !== undefined) order.isPaid = Boolean(req.body.isPaid);
   if (req.body.isDelivered !== undefined) order.isDelivered = Boolean(req.body.isDelivered);
   const updatedOrder = await order.save();
+  await updatedOrder.populate('user', 'name email');
   res.json({ success: true, data: updatedOrder });
 };
 
